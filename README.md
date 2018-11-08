@@ -1,6 +1,3 @@
-# qredit-snapshot
-
-Use:
 
 
 Download:
@@ -13,5 +10,8 @@ Execute:
 ```
 cd qredit-snapshot && bash snapshot.sh
 ```
+
+
+
 
 Qredits to Gr33nDrag0n69
