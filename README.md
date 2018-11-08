@@ -6,7 +6,6 @@ Use:
 Download:
 ```
 git clone https://github.com/HodlerCompany/qredit-snapshot
-
 ```
 
 Execute:
