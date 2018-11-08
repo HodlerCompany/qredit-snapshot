@@ -18,9 +18,9 @@
 #
 ###############################################################################
 
-QreditNetwork="mainnet"
+QreditNetwork="db"
 QreditNodeDirectory="$HOME/qredit-full-node"
-SnapshotDirectory='/var/www/vhosts/qredit.cloud/snapshots.qredit.cloud'
+SnapshotDirectory='/home/nayiem/snapshots'
 
 ### Test qredit-node Started
 QreditNodePid=$( pgrep -a "node" | grep qredit-full-node | awk '{print $1}' )
@@ -46,9 +46,9 @@ if [ "$QreditNodePid" != "" ] ; then
     done < $SeedNodeFile
     rm -f $SeedNodeFile
 
-    ### Get highest Height from 8 random seed nodes
+    ### Get highest Height from 5 random seed nodes
     SeedNodeCount=${#SeedNodeList[@]}
-    for (( TopHeight=0, i=1; i<=8; i++ )); do
+    for (( TopHeight=0, i=1; i<=5; i++ )); do
         RandomOffset=$(( RANDOM % $SeedNodeCount ))
         SeedNodeUri="http://${SeedNodeList[$RandomOffset]}/api/loader/status/sync"
         SeedNodeHeight=$( curl --max-time 2 -s $SeedNodeUri | jq -r '.height' )
@@ -56,7 +56,7 @@ if [ "$QreditNodePid" != "" ] ; then
     done
 
     ### Get local qredit-full-node height
-    LocalHeight=$( curl --max-time 2 -s 'http://127.0.0.1:4100/api/loader/status/sync' | jq '.height' )
+    LocalHeight=$( curl --max-time 2 -s 'http://127.0.0.1:4101/api/loader/status/sync' | jq '.height' )
 
     ### Test qredit-node Sync.
     if [ "$LocalHeight" -eq "$TopHeight" ]; then
